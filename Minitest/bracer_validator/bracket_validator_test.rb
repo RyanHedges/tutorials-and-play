@@ -25,6 +25,12 @@ describe "Integration type tests" do
     validator.validate
     validator.wont_be :valid?
   end
+
+  it "returns false with this gatcha" do
+    validator = BracketValidator.new("{[(])}")
+    validator.validate
+    validator.wont_be :valid?
+  end
 end
 
 describe BracketValidator do
