@@ -7,6 +7,24 @@ describe "Integration type tests" do
     validator.validate
     validator.must_be :valid?
   end
+
+  it "returns true with a complicated valid bracket pair" do
+    validator = BracketValidator.new("[{[]()()}{[]}]")
+    validator.validate
+    validator.must_be :valid?
+  end
+
+  it "returns false with a invalid bracket pair" do
+    validator = BracketValidator.new("[)")
+    validator.validate
+    validator.wont_be :valid?
+  end
+
+  it "returns false with a complicated valid bracket pair" do
+    validator = BracketValidator.new("[({}){([{}])}]{[()]}{{{()}}(}")
+    validator.validate
+    validator.wont_be :valid?
+  end
 end
 
 describe BracketValidator do
@@ -25,7 +43,6 @@ describe BracketValidator do
     end
 
     it "returns false when the code string is invalid" do
-      skip("not implemented yet")
       validator = BracketValidator.new("[)")
       validator.validate
       validator.valid?.must_equal false

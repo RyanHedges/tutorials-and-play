@@ -9,8 +9,7 @@ class BracketValidator
 
   def validate
     split_code_string = @code_string.chars
-    verify_collection(split_code_string)
-    @valid_status = true
+    @valid_status = verify_collection(split_code_string)
   end
 
   def verify_collection(code_collection)
@@ -18,11 +17,17 @@ class BracketValidator
     code_collection.each do |brack|
       bracket = Bracket.new(brack)
       if bracket.opener?
-        pair_stack
+        pair_stack << Pair.new(bracket)
       else
-
+        opener_pair = pair_stack.pop
+        if opener_pair.closer_for_opener?(bracket)
+        else
+          pair_stack.push(opener_pair)
+          return false
+        end
       end
     end
+    return true
   end
 end
 
