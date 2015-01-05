@@ -22,5 +22,16 @@ class BracketValidator
 end
 
 class Bracket
+  def initialize(bracket)
+    @bracket = bracket
+  end
 
+  def opener?
+    case @bracket
+    when "[", "(", "{"
+      return true
+    else
+      return false
+    end
+  end
 end
