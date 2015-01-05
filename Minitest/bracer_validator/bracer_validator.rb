@@ -6,4 +6,9 @@ class BracerValidator
   def valid?
     true
   end
+
+  def validate
+    split_code_string = @code_string.chars
+    @valid_status = true
+  end
 end
