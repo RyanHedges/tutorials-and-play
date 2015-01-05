@@ -34,4 +34,13 @@ class Bracket
       return false
     end
   end
+
+  def closer?
+    case @bracket
+    when "]", ")", "}"
+      return true
+    else
+      return false
+    end
+  end
 end

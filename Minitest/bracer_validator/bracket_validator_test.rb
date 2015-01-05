@@ -92,4 +92,34 @@ describe Bracket do
       end
     end
   end
+
+  describe "closer?" do
+    describe "when the bracket is ')'" do
+      it "returns true" do
+        bracket = Bracket.new(")")
+        bracket.closer?.must_equal true
+      end
+    end
+
+    describe "when the bracket is ']'" do
+      it "returns true" do
+        bracket = Bracket.new("]")
+        bracket.closer?.must_equal true
+      end
+    end
+
+    describe "when the bracket is '}'" do
+      it "returns true" do
+        bracket = Bracket.new("}")
+        bracket.closer?.must_equal true
+      end
+    end
+
+    describe "when the bracet is an invalid closer" do
+      it "returns false" do
+        bracket = Bracket.new("[")
+        bracket.closer?.must_equal false
+      end
+    end
+  end
 end
