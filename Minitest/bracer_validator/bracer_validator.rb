@@ -1,9 +1,9 @@
 class BracerValidator
-  def validate(code_string)
-    if code_string == "{}"
-      return true
-    else
-      return false
-    end
+  def initialize(code_string)
+    @code_string = code_string
+  end
+
+  def valid?
+    true
   end
 end
