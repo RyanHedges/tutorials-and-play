@@ -4,7 +4,7 @@ class BracketValidator
   end
 
   def valid?
-    true
+    @valid_status
   end
 
   def validate
@@ -14,9 +14,14 @@ class BracketValidator
   end
 
   def verify_collection(code_collection)
-    opener_stack = Array.new
-    code_collection.each do |opener_or_closer|
+    pair_stack = Array.new
+    code_collection.each do |brack|
+      bracket = Bracket.new(brack)
+      if bracket.opener?
+        pair_stack
+      else
 
+      end
     end
   end
 end
@@ -41,6 +46,31 @@ class Bracket
       return true
     else
       return false
+    end
+  end
+
+  def code
+    @bracket.ord
+  end
+end
+
+class Pair
+  def initialize(bracket)
+    @opening_bracket = bracket
+  end
+
+  def closer_for_opener?(closer_bracket)
+    needed_closer_code == closer_bracket.code ? true : false
+  end
+
+  def needed_closer_code
+    case @opening_bracket.code
+    when 91
+      return 93
+    when 40
+      return 41
+    when 123
+      return 125
     end
   end
 end

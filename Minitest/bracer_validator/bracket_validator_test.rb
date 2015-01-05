@@ -20,12 +20,14 @@ describe BracketValidator do
   describe ".valid?" do
     it "returns true when the code string is valid" do
       validator = BracketValidator.new("[]")
+      validator.validate
       validator.valid?.must_equal true
     end
 
     it "returns false when the code string is invalid" do
       skip("not implemented yet")
       validator = BracketValidator.new("[)")
+      validator.validate
       validator.valid?.must_equal false
     end
   end
@@ -119,6 +121,74 @@ describe Bracket do
       it "returns false" do
         bracket = Bracket.new("[")
         bracket.closer?.must_equal false
+      end
+    end
+  end
+
+  describe "code" do
+    it "returns the ascii character code for the bracket" do
+      bracket = Bracket.new("[")
+      bracket.code.must_equal 91
+    end
+
+    it "returns the code for '}'" do
+      bracket = Bracket.new("}")
+      bracket.code.must_equal 125
+    end
+  end
+end
+
+describe Pair do
+  describe "initalize" do
+    it "stores the opener bracket object" do
+      opening_bracket = Bracket.new("[")
+      pair = Pair.new(opening_bracket)
+      pair.instance_variable_get(:@opening_bracket).must_be_instance_of Bracket
+    end
+  end
+
+  describe "closer_for_opener?" do
+    describe "when the bracket matches the pairs opener" do
+      it "returns true" do
+        opening_bracket = Bracket.new("[")
+        valid_closing_bracket = Bracket.new("]")
+        pair = Pair.new(opening_bracket)
+        pair.closer_for_opener?(valid_closing_bracket).must_equal true
+      end
+    end
+
+    describe "when the bracket does not match the pairs opener" do
+      it "returns false" do
+        opening_bracket = Bracket.new("{")
+        invalid_closing_bracket = Bracket.new(")")
+        pair = Pair.new(opening_bracket)
+        pair.closer_for_opener?(invalid_closing_bracket).must_equal false
+      end
+    end
+  end
+
+  describe "needed_closer_code" do
+    describe "when it is '['" do
+      it "returns the closing code that matches the opener" do
+        opening_bracket = Bracket.new("[")
+        pair = Pair.new(opening_bracket)
+        pair.needed_closer_code.must_equal 93
+      end
+    end
+
+    describe "when it is '('" do
+      it "returns the closing code that matcher the opener" do
+        opening_bracket = Bracket.new("(")
+        pair = Pair.new(opening_bracket)
+        pair.needed_closer_code.must_equal 41
+      end
+    end
+
+    describe "when it is '{'" do
+      it "returns the closing code that matcher the opener" do
+        opening_bracket = Bracket.new("{")
+        pair = Pair.new(opening_bracket)
+        pair.needed_closer_code.must_equal 125
       end
     end
   end
