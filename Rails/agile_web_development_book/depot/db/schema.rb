@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150611061024) do
 
   create_table "products", force: :cascade do |t|
-    t.string   "tittle"
+    t.string   "title"
     t.text     "description"
     t.string   "image_url"
     t.decimal  "price",       precision: 8, scale: 2
