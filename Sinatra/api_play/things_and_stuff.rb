@@ -1,7 +1,11 @@
 require 'sinatra'
 
 get '/' do
-  "things and stuff"
+  erb :index
+end
+
+get '/all' do
+  erb :name, layout: :foo
 end
 
 #path magic
@@ -42,4 +46,14 @@ get('/stream') { Stream.new }
 
 get('/request') do
   p request.inspect
+end
+
+get '/streamteam' do
+  stream do |out|
+    out << "It's gonna be legen -\n"
+    sleep 0.5
+    out << " (wait for it) \n"
+    sleep 1
+    out << "- dary!\n"
+  end
 end
