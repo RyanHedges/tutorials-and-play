@@ -1,6 +1,5 @@
 This is a tutorial from a medium article that talks about submodules. It can be
-found here:
-`https://medium.com/@porteneuve/mastering-git-submodules-34c65e940407#.hcoa9ovk3`
+found [here](https://medium.com/@porteneuve/mastering-git-submodules-34c65e940407#.hcoa9ovk3).
 
 The reason I am going through this tutorial is because I am wanting to add
 submodules to my dotfiles project for vim plugins. I've done this locally, but
