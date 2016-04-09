@@ -70,7 +70,7 @@ get the submodule.
 
 Deinit does not permanently remove the submodule.
 
-###### remove submodyle permanently
+###### remove submodule permanently
 
 You can run `git rm` to remove the submodule locally.
 
